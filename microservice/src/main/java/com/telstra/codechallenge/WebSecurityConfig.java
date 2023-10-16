@@ -14,6 +14,9 @@ public class WebSecurityConfig {
     http.authorizeHttpRequests(requests -> requests
             .anyRequest()
             .permitAll());
+    //TODO: Temporarily adding for enabling shutdown via actuator for testing the application
+    // remove in production and replace with required csrf token implementation
+    http.csrf().disable();
 
     return http.build();
   }
