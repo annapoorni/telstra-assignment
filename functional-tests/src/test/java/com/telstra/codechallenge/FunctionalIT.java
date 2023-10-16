@@ -17,4 +17,10 @@ public class FunctionalIT {
   Karate testCatFacts() {
     return Karate.run("catfacts").relativeTo(getClass());
   }
+
+  @Karate.Test
+  Karate testGitHubSearchAPI() {
+    return Karate.run("githubsearchapi").relativeTo(getClass());
+  }
+
 }

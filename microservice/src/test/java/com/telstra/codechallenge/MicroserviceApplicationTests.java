@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import com.telstra.codechallenge.github.GitHubSearchAPIResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,5 +34,14 @@ class MicroserviceApplicationTests {
 		System.out.println("response: " + response);
 		assertEquals("{\"status\":\"UP\"}", response
 				.getBody());
+	}
+
+	@Test
+	void testLatestHotRepositories() throws RestClientException, MalformedURLException {
+		ResponseEntity<GitHubSearchAPIResponse> response = restTemplate
+				.getForEntity(new URL("http://localhost:" + port + "/latestHotRepositories")
+						.toString(), GitHubSearchAPIResponse.class);
+		System.out.println("response: " + response);
+		assertEquals(5, response.getBody().getItems().size());
 	}
 }
