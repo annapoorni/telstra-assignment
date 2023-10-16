@@ -20,14 +20,16 @@ Feature: As a developer I want to test, GitHub Search API Endpoints in my applic
     And assert response.total_count != 5
     And assert response.items.length == 5
 
+
+  #Temp case as the total count may vary based on real data
   Scenario: Does wrong page number return empty list
     Given url microserviceUrl
     And path '/latestHotRepositories'
     And param count = 4
-    And param page = 30
+    And param page = 900
     When method GET
     Then status 200
-    And assert response.items.length == 0
+    And match response.message contains "Only the first 1000 search results are available"
 
   Scenario: Does wrong path fail the request
     Given url microserviceUrl
